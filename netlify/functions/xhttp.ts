@@ -1,7 +1,7 @@
 export default async (request: Request): Promise<Response> => {
   const url = new URL(request.url);
   
-  const targetHost = "ari.titi2.sbs";        // دامنه پنل x-ui تو
+  const targetHost = "ari.titi2.sbs";     // دامنه پنل x-ui تو
   const targetPort = "443";
   const targetProtocol = "https";
 
@@ -24,15 +24,11 @@ export default async (request: Request): Promise<Response> => {
       keepalive: true,
     });
 
-    const newResponse = new Response(response.body, {
+    return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
       headers: response.headers,
     });
-
-    newResponse.headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
-
-    return newResponse;
 
   } catch (error) {
     console.error("XHTTP Relay Error:", error);
